@@ -23,11 +23,14 @@ Even though some tools have version compatibilty, it is always safier to use the
 You can make any combination you want.
 
 ```
-velero="1.0.0"
+helm="2.16.7"
 kubectl="1.18.0"
-docker run --rm -ti --name velero-$velero_kubectl-$kubectl \
+velero="1.0.0"
+docker run --rm -ti --name cluster001-mgmt \
   -v $HOME/.kube/config/:/root/.kube/config \
-  -v "`pwd`/dist/velero/$velero/velero-v$velero-linux-amd64/velero":/usr/local/bin/velero \
+  -v "`pwd`/dist/helm/$helm/linux-amd64/helm":/usr/local/bin/helm \
+  -v "`pwd`/dist/helm/$helm/linux-amd64/tiller":/usr/local/bin/tiller \
   -v "`pwd`/dist/kubectl/$kubectl/kubectl":/usr/local/bin/kubectl \
+  -v "`pwd`/dist/velero/$velero/velero-v$velero-linux-amd64/velero":/usr/local/bin/velero \
   ubuntu:18.04
 ```
